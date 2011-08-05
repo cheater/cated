@@ -1,0 +1,85 @@
+USAGE
+
+Format: cated [ FILE ]
+
+cated is a light-weight text editor. To use it, invoke it with
+
+cated FILE
+
+and then enter lines as you usually would enter them into cat. You can edit the
+line before you press the Enter key to go to the next line.
+
+If FILE is not specified, the result will be written out to stdout.
+
+To write out the file, press Ctrl-D. You may have to press Ctrl-D twice if the
+line you are currently editing is not blank.
+
+To abort editing press Ctrl-C. If FILE was specified, it will not be
+overwritten. If FILE was not specified and the output of cated was being piped
+into another command, the pipeline will be aborted.
+
+
+VERSION CONTROL SYSTEMS
+
+The cated is thought to be used with version control systems. Below, you may
+find a few configuration and usage examples.
+
+
+USAGE WITH BAZAAR
+
+In order to specify cated as the editor used for commit messages in bazaar, set
+the following option in ~/.bazaar/bazaar.conf, in the [DEFAULT] section:
+
+editor = /path/to/cated
+
+There are other ways to do this, refer to the bazaar manual.
+
+In order to use cated with bazaar:
+
+1. run bzr ci myfile, log in if needed.
+2. cated will show you the temporary file names:
+
+(cat > /tmp/cated.ext > /tmp/file.ext).
+
+3. type in your commit message. You can use the backspace, and you can enter
+   new lines, but lines already entered cannot be changed. Then press Ctrl-D
+   once to save the message. You may have to press Ctrl-D twice if the line you
+   are currently editing is not blank. To abort editing, press Ctrl-C. This
+   will abort the commit, because bzr notices that the temporary file has not
+   been modified.
+
+
+USAGE WITH MERCURIAL
+
+In order to specify cated as the editor used for commit messages in mercurial,
+go to your repository and set the following option in .hg/hgrc, in the [ui]
+section:
+
+editor = /path/to/cated
+
+There are other ways to do this, refer to the mercurial manual.
+
+Usage is similar to bazaar, please read the section above.
+
+
+USAGE WITH OTHER VERSION CONTROL SYSTEMS
+
+You can probably use cated with any VCS out there - though I haven't tried. Try
+reading the sections above for mercurial and bazaar, and compare with the
+manual for the VCS you are using.
+
+
+LICENSE
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
