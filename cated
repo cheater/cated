@@ -16,17 +16,27 @@
 temp=$(basename $0)
 tmp_file=$(mktemp -q /tmp/${temp}.XXXXXX)
 if [ $? -ne 0 ]; then
-    echo "$0: Can't create temp file, using vim instead..."
-    vim "$1"
-    exit $?
+    if [ -n "$1" ]; then
+        echo "$0: Can't create temp file, using vim instead..."
+        vim "$1"
+        exit $?
+    else
+        echo "$0: Can't create temp file, aborting."
+        exit $?
+        fi
     fi
 echo "cat > $tmp_file > $1"
 cat > "$tmp_file"
 ret=$?
 echo
 if [ $ret -eq 0 ]; then
-    cat "$tmp_file" > "$1"
-    ret=$?
+    if [ -n "$1" ]; then
+        cat "$tmp_file" > "$1"
+        ret=$?
+    else
+        cat "$tmp_file"
+        ret=$?
+        fi
     rm -rf "$tmp_file"
     fi
 exit $ret
